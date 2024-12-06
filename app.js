@@ -8,7 +8,7 @@ var logger = require('morgan'); // Middleware pour journaliser les requêtes HTT
 // Importation des routes
 var indexRouter = require('./routes/index'); // Route pour la racine (`/`).
 var usersRouter = require('./routes/users'); // Route pour `/users`.
-var postsRouter = require('./routes/post');
+var postRouter = require('./routes/post');
 
 var app = express(); // Création d'une application Express.
 
@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Sert les fichiers st
 // Déclaration des routes
 app.use('/', indexRouter); // Utilise `indexRouter` pour la route racine `/`.
 app.use('/users', usersRouter); // Utilise `usersRouter` pour la route `/users`.
-app.use('/post', postsRouter);
+app.use('/post', postRouter);
 
 // Gestion des erreurs 404
 app.use(function(req, res, next) {
