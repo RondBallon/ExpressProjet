@@ -4,11 +4,11 @@ const sequelize = require('../sequelize'); // Import de la configuration Sequeli
 const User = sequelize.define('User', {
   // Définitions des colonnes
   username: {
-    type: DataTypes.VARCHAR(50),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   password: {
-    type: DataTypes.VARCHAR(50),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   avatar: {
@@ -16,7 +16,7 @@ const User = sequelize.define('User', {
     allowNull: true,
   },
   description: {
-    type: DataTypes.VARCHAR(255),
+    type: DataTypes.STRING(255),
     allowNull: true,
   },  
 }, {
