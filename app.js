@@ -8,7 +8,8 @@ var createError = require('http-errors');
 var app = express();
 // Importation des routes
 var indexRouter = require('./routes/index'); // Route pour la racine (`/`).
-var postsRouter = require('./routes/post');
+var usersRouter = require('./routes/users'); // Route pour `/users`.
+var postRouter = require('./routes/post');
 
 // Ajouter le middleware express.urlencoded et autres après la création de l'app
 app.use(express.urlencoded({ extended: true })); // Si tu veux aussi traiter les formulaires avec des méthodes PUT et DELETE
@@ -40,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Sert les fichiers st
 // Déclaration des routes
 app.use('/', indexRouter); // Utilise `indexRouter` pour la route racine `/`.
 app.use('/users', usersRouter); // Utilise `usersRouter` pour la route `/users`.
-app.use('/post', postsRouter);
+app.use('/post', postRouter);
 
 // Gestion des erreurs 404
 app.use(function(req, res, next) {
