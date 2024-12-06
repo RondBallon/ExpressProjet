@@ -33,11 +33,11 @@ module.exports = (sequelize, DataTypes) => {
 
   Post.init({
     // Cette méthode sert à initialiser le modèle en définissant les attributs et les types de données de la table qui sera créée en base de données.
-    user_id: DataTypes.BIGINT,  // L'attribut `user_id` est défini comme un type BIGINT pour représenter l'ID de l'utilisateur.
+    user_id: DataTypes.INTEGER,  // L'attribut `user_id` est défini comme un type INTEGER pour représenter l'ID de l'utilisateur.
     title: DataTypes.STRING,  // L'attribut `title` est défini comme une chaîne de caractères (STRING).
     content: DataTypes.TEXT,  // L'attribut `content` est défini comme un champ de texte (TEXT).
     image: DataTypes.TEXT,  // L'attribut `image` est aussi défini comme un champ de texte pour stocker des liens d'images ou des descriptions.
-    tag_id: DataTypes.BIGINT  // L'attribut `tag_id` est défini comme un BIGINT, probablement une clé étrangère pointant vers une table de tags.
+    tag_id: DataTypes.INTEGER  // L'attribut `tag_id` est défini comme un INTEGER, probablement une clé étrangère pointant vers une table de tags.
   }, {
     sequelize,  // L'instance Sequelize utilisée pour connecter ce modèle à la base de données.
     modelName: 'Post',  // Le nom du modèle. Ici, il s'appelle `Post`.
