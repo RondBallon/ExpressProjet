@@ -8,14 +8,14 @@ var logger = require('morgan'); // Middleware pour journaliser les requêtes HTT
 // Importation des routes
 var indexRouter = require('./routes/index'); // Route pour la racine (`/`).
 var usersRouter = require('./routes/users'); // Route pour `/users`.
-var postRouter = require('./routes/post');
+var postsRouter = require('./routes/posts');
 
 var app = express(); // Création d'une application Express.
 
 // Configuration de Sequelize pour gérer la base de données
 const sequelize = require('./sequelize'); // Instance Sequelize configurée pour la base de données.
 const User = require('./models/User'); // Exemple d'importation d'un modèle Sequelize représentant une table.
-const post = require('./models/post');
+const posts = require('./models/post');
 
 // Synchronisation de la base de données via Sequelize
 (async () => {
@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Sert les fichiers st
 // Déclaration des routes
 app.use('/', indexRouter); // Utilise `indexRouter` pour la route racine `/`.
 app.use('/users', usersRouter); // Utilise `usersRouter` pour la route `/users`.
-app.use('/post', postRouter);
+app.use('/posts', postsRouter);
 
 // Gestion des erreurs 404
 app.use(function(req, res, next) {
