@@ -11,15 +11,14 @@ const editCommentForm = (req, res) => {
 const createComment = async (req, res) => {
   try {
     // Récupérer les données du formulaire depuis `req.body`
-    const { id, content, user_id, post_id } = req.body;
+    const { content, user_id, post_id } = req.body;
 
     // Créer un nouveau commentaire dans la base de données
     const newComment = await Comments.create({
-      id: id,
-      content: content,
+      content:content,
       user_id: user_id || null, // Par défaut null si non fourni
-      post_id: post_id || null, // Par défaut null si non fourni
-
+      post_id: post_id || null // Par défaut null si non fourni
+      
     });
 
     // Rediriger ou répondre avec une confirmation
@@ -80,34 +79,34 @@ const getComment = async (req, res) => {
 //Pour MODIFIER un commentaire
 /* const updateComment = async (req, res) => {
   const id = req.params.id;
-  const index = await Comments.findIndex((comment) => id === id);
+  const index = await Comments.findIndex((comment) => id === id); */
 //pour afficher TOUS les commentaires 
-const getAllComments = async(req, res) => {
+// const getAllComments = async(req, res) => {
    
-  try{
-    //on récupère tous les commentaires depuis la base de données
-    const comments =await Comments.findAll();
-    //console.log(comments);
-    //Envoyer les articles au template `comments/index` pour qu'ils soient affichés 
-    //res.json(comments)
-    res.render('comments/listComments', {comments});
+//   try{
+//     //on récupère tous les commentaires depuis la base de données
+//     const comments =await Comments.findAll();
+//     //console.log(comments);
+//     //Envoyer les articles au template `comments/index` pour qu'ils soient affichés 
+//     //res.json(comments)
+//     res.render('comments/listComments', {comments});
 
-  }catch (err){
-    console.error(err);
-    res.status(500).send('Erreur lors de la récupération des articles.');
-  }
-}
+//   }catch (err){
+//     console.error(err);
+//     res.status(500).send('Erreur lors de la récupération des articles.');
+//   }
+// }
 
 // Pour afficher un commentaire en particulier via son ID
 
-const getComment = ((req, res) => {
-  const id = Number(req.params.comment_id)
-  const comment = Comments.find(comment => comment_id === id)
-    if(!comment){
-      return res.status(404).send('Commentaire introuvable')
-    }
-    res.json(comment)
-})
+// const getComment = ((req, res) => {
+//   const id = Number(req.params.comment_id)
+//   const comment = Comments.find(comment => comment_id === id)
+//     if(!comment){
+//       return res.status(404).send('Commentaire introuvable')
+//     }
+//     res.json(comment)
+// })
 
 //Pour MODIFIER un commentaire
 const updateComment = ((req, res) =>{
@@ -117,56 +116,24 @@ const updateComment = ((req, res) =>{
     id: Comments[index].id,
     content: req.body.content,
     user_id: req.body.user,
-    post_id: req.body.post,
-  };
-  Comments[index] = updatedComment;
-  res.render("comment/listComments");
-  res.status(200).json("Commentaire mis à jour");
-}; */
-
-//Pour afficher le formulaire de modification d'un commentaire
-const updateCommentForm = async (req, res) => {
-  const CommentToUpdate = await Comments.findByPk(req.params.id);
-  res.render("comments/update");
-  if (!Comments) return res.status(404).send;
-};
-
-const updateComment = async (req, res) => {
-  try {
-    const id = req.params.id; // Récupérer l'ID du commentaire à modifier
-    //console.log(id);
-    const { content, user_id, post_id } = req.body;
-
-    // Trouver le commentaire par ID
-    const comment = await Comment.findByPk(id);
-
-    if (!comment) {
-      return res.status(404).json({ message: "Commentaire introuvable" });
-    }
-
-    // Mettre à jour le commentaire
-    comment.content = content;
-    comment.user_id = user_id || comment.user_id;
-    comment.post_id = post_id || comment.post_id;
-    await comment.save();
-
-    // Rediriger vers la liste des commentaires après la modification
-    res.redirect("/comments/listComments");
-  } catch (err) {
-    console.error("Erreur lors de la mise à jour du commentaire :", err);
-    res
-      .status(500)
-      .json({ message: "Erreur lors de la mise à jour du commentaire." });
+    post_id: req.body.user
   }
-};
+  comments[index] = updatedComment
+  res.status(200).json('Commentaire mis à jour')
+})
+
+
 
 // Pour SUPPRIMER un commentaire
-const deleteComment = async (req, res) => {
-  const id = req.params.comment_id;
-  const index = await Comments.findIndex((comment) => id === id);
-  Comments.splice(index, 1);
-  res.status(200).json("Commentaire supprimé");
-};
+const deleteComment = ((req, res) => {
+  const id = Number(req.params.comment_id)
+  const index = Comments.findIndex(comment => comment_id === id)
+  Comments.splice(index,1)
+  res.status(200).json('Commentaire supprimé')
+  
+})
+
+
 
 module.exports = {
   editCommentForm,
