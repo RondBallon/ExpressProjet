@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const Comments = require("../models/comments"); //Importe le modèle Sequelize pour les commentaires/
 
 //Pour afficher le formulaire de création de commentaires
@@ -7,24 +6,11 @@ const editCommentForm = (req, res) => {
   res.render("comments/create");
   if (!Comments) return res.status(404).send;
 };
-=======
-const Comments = require('../models/comments'); //Importe le modèle Sequelize pour les commentaires/
-
-//Pour afficher le formulaire de création de commentaires
-const editCommentForm = ((req, res) => {
-  res.render('comments/create');
-  //const comment = Comment.findByPk(req.params.id);
-  if (!Comments) return res.status(404).send;
-  
-});
-
->>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
 
 // Pour créer un nouveau commentaire
 const createComment = async (req, res) => {
   try {
     // Récupérer les données du formulaire depuis `req.body`
-<<<<<<< HEAD
     const { id, content, user_id, post_id } = req.body;
 
     // Créer un nouveau commentaire dans la base de données
@@ -33,21 +19,11 @@ const createComment = async (req, res) => {
       content: content,
       user_id: user_id || null, // Par défaut null si non fourni
       post_id: post_id || null, // Par défaut null si non fourni
-=======
-    const { content, user_id, post_id } = req.body;
 
-    // Créer un nouveau commentaire dans la base de données
-    const newComment = await Comments.create({
-      content:content,
-      user_id: user_id || null, // Par défaut null si non fourni
-      post_id: post_id || null // Par défaut null si non fourni
-      
->>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
     });
 
     // Rediriger ou répondre avec une confirmation
     res.status(201).json({
-<<<<<<< HEAD
       message: "Commentaire créé avec succès.",
       comment: newComment,
     });
@@ -55,15 +31,6 @@ const createComment = async (req, res) => {
     console.error("Erreur lors de la création du commentaire :", error);
     res.status(500).json({
       message: "Erreur lors de la création du commentaire.",
-=======
-      message: 'Commentaire créé avec succès.',
-      comment: newComment,
-    });
-  } catch (error) {
-    console.error('Erreur lors de la création du commentaire :', error);
-    res.status(500).json({
-      message: 'Erreur lors de la création du commentaire.',
->>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
       error: error.message,
     });
   }
@@ -81,7 +48,6 @@ const createComment = async (req, res) => {
   res.status(201).json(newComment)
 }); */
 
-<<<<<<< HEAD
 //pour afficher TOUS les commentaires
 const getAllComments = async (req, res) => {
   try {
@@ -148,7 +114,11 @@ const getComment = ((req, res) => {
 const updateComment = ((req, res) =>{
   const id = Number(req.params.comment_id)
   const index = Comments.findIndex(comment => comment_id === id)
+<<<<<<< HEAD
 >>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
+=======
+>>>>>>> 3378dac (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
+>>>>>>> 685c5bc (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
   const updatedComment = {
     id: Comments[index].id,
     content: req.body.content,
@@ -204,39 +174,13 @@ const deleteComment = async (req, res) => {
   Comments.splice(index, 1);
   res.status(200).json("Commentaire supprimé");
 };
-=======
-    post_id: req.body.user
-  }
-  comments[index] = updatedComment
-  res.status(200).json('Commentaire mis à jour')
-})
-
-
-
-// Pour SUPPRIMER un commentaire
-const deleteComment = ((req, res) => {
-  const id = Number(req.params.comment_id)
-  const index = Comments.findIndex(comment => comment_id === id)
-  Comments.splice(index,1)
-  res.status(200).json('Commentaire supprimé')
-  
-})
-
-
->>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
 
 module.exports = {
   editCommentForm,
   createComment,
   getAllComments,
   getComment,
-<<<<<<< HEAD
   updateCommentForm,
   updateComment,
   deleteComment,
 };
-=======
-  updateComment,
-  deleteComment
-}
->>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)

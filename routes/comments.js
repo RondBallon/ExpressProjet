@@ -52,6 +52,23 @@ router.delete("/delete/:id", commentsController.deleteComment);
 
 module.exports = router;
 =======
+<<<<<<< HEAD
+=======
+const express = require('express'); //Permet de charger Express
+const router = express.Router(); // Crée un routeur qui va nous permettre de définir nos routes
+
+const commentsController = require('../controllers/commentsController.js');
+
+/* const  { 
+  editCommentForm,
+  createComment,
+  getAllComments,
+  getComment,
+  updateComment,
+  deleteComment 
+} = require('../controllers/commentsController.js'); */
+
+>>>>>>> 685c5bc (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
 
 /***********  CRUD **************/ 
 //route pour afficher le formulaire de création de commentaire
@@ -86,4 +103,8 @@ module.exports = router;
 
 
 
+<<<<<<< HEAD
 >>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
+=======
+>>>>>>> 3378dac (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
+>>>>>>> 685c5bc (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)

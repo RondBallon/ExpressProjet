@@ -78,4 +78,8 @@ const {DataTypes} = require('sequelize');
   //return Comments;
 //};
 module.exports = Comments;
+<<<<<<< HEAD
 >>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
+=======
+>>>>>>> 3378dac (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
+>>>>>>> 685c5bc (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
