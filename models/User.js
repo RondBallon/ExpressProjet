@@ -1,22 +1,22 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../sequelize'); // Import de la configuration Sequelize
+const sequelize = require('../sequelize.js'); // Import de la configuration Sequelize
 
 const User = sequelize.define('User', {
   // Définitions des colonnes
   username: {
-    type: DataTypes.VARCHAR(50),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   password: {
-    type: DataTypes.VARCHAR(50),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   avatar: {
-    type: DataTypes.TEXT,
+    type: DataTypes.TEXT(255),
     allowNull: true,
   },
   description: {
-    type: DataTypes.VARCHAR(255),
+    type: DataTypes.STRING(255),
     allowNull: true,
   },  
 }, {

@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Créer un utilisateur
+  body
+    h1 Créer un utilisateur
+    form(action='/users', method='POST')
+      div
+        label(for='username') Nom d'utilisateur:
+        input(type='text', id='username', name='username', required=true)
+      div
+        label(for='password') Mot de passe:
+        input(type='password', id='password', name='password', required=true)
+      div
+        label(for='avatar') URL de l'avatar (facultatif):
+        input(type='text', id='avatar', name='avatar')
+      div
+        label(for='description') Description (facultatif):
+        input(type='text', id='description', name='description')
+      div
+        button(type='submit') Créer l'utilisateur

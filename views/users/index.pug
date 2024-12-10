@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Liste des utilisateurs
+  body
+    h1 Liste des utilisateurs
+    ul
+      each user in users
+        li
+          | #{user.name} - #{user.email}
+          a(href=`/users/${user.id}/edit`) Modifier
+          form(action=`/users/${user.id}/delete`, method="POST")
+            button(type="submit") Supprimer
+    a(href="/users/create") Créer un nouvel utilisateur

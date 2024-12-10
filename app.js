@@ -1,57 +1,46 @@
-// Importation des modules nécessaires
-var createError = require('http-errors'); // Permet de générer des erreurs HTTP personnalisées.
-var express = require('express'); // Framework web pour simplifier la création d'applications Node.js.
-var path = require('path'); // Fournit des outils pour gérer et manipuler les chemins de fichiers.
-var cookieParser = require('cookie-parser'); // Middleware pour analyser les cookies dans les requêtes.
-var logger = require('morgan'); // Middleware pour journaliser les requêtes HTTP.
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var createError = require('http-errors');
 
-// Importation des routes
-var indexRouter = require('./routes/index'); // Route pour la racine (`/`).
-var usersRouter = require('./routes/users'); // Route pour `/users`.
+// Créer l'application Express
+var app = express();
 
-var app = express(); // Création d'une application Express.
+// Ajouter le middleware express.urlencoded et autres après la création de l'app
+app.use(express.urlencoded({ extended: true })); // Si tu veux aussi traiter les formulaires avec des méthodes PUT et DELETE
+app.use(express.json());  // Analyser les corps de requêtes JSON
+app.use(cookieParser());  // Analyser les cookies dans les requêtes
+app.use(express.static(path.join(__dirname, 'public')));  // Servir les fichiers statiques (si nécessaires)
+app.use(logger('dev'));  // Journaliser les requêtes HTTP
 
-// Configuration de Sequelize pour gérer la base de données
-const sequelize = require('./sequelize'); // Instance Sequelize configurée pour la base de données.
-const User = require('./models/User'); // Exemple d'importation d'un modèle Sequelize représentant une table.
+// Importer les routes
+var userRouter = require('./routes/users/users');  // Nous utilisons maintenant la route qui gère les utilisateurs
+var indexRouter = require('./routes/index');  // La route pour la page d'accueil (index)
 
-// Synchronisation de la base de données via Sequelize
-(async () => {
-  try {
-    await sequelize.sync({ alter: true }); // Synchronise les modèles avec la base de données en modifiant les schémas si nécessaire.
-    console.log('Database synchronized successfully.'); // Log en cas de succès.
-  } catch (error) {
-    console.error('Database synchronization failed:', error); // Log en cas d'échec.
-  }
-})();
+// Configuration de l'application
+app.set('views', path.join(__dirname, 'views'));  // Définit le répertoire pour les vues (templates)
+app.set('view engine', 'pug');  // Définit le moteur de vues (Pug ici)
 
-// Configuration du moteur de vue
-app.set('views', path.join(__dirname, 'views')); // Définit le répertoire contenant les fichiers de templates.
-app.set('view engine', 'jade'); // Définit `jade` (renommé `pug`) comme moteur de templates.
+// Routes
+app.use('/', indexRouter);  // La route pour la page d'accueil
+app.use('/users', userRouter);  // Gérer les utilisateurs avec le fichier `users.js` (ta route des utilisateurs)
 
-// Configuration des middlewares
-app.use(logger('dev')); // Ajoute un journal des requêtes HTTP en mode développement.
-app.use(express.json()); // Middleware pour analyser les corps de requêtes JSON.
-app.use(express.urlencoded({ extended: false })); // Analyse les données encodées dans les URL (simples objets).
-app.use(cookieParser()); // Middleware pour analyser les cookies.
-app.use(express.static(path.join(__dirname, 'public'))); // Sert les fichiers statiques du répertoire `public`.
-
-// Déclaration des routes
-app.use('/', indexRouter); // Utilise `indexRouter` pour la route racine `/`.
-app.use('/users', usersRouter); // Utilise `usersRouter` pour la route `/users`.
-
-// Gestion des erreurs 404
+// Gestion des erreurs
+// Si aucune route n'est trouvée (erreur 404)
 app.use(function(req, res, next) {
-  next(createError(404)); // Crée une erreur 404 pour les routes non trouvées et la passe au gestionnaire d'erreurs.
+  next(createError(404));
 });
 
-// Gestionnaire global d'erreurs
+// Gestion des erreurs globales
 app.use(function(err, req, res, next) {
-  res.locals.message = err.message; // Définit un message d'erreur local.
-  res.locals.error = req.app.get('env') === 'development' ? err : {}; // Affiche l'erreur complète en mode développement uniquement.
-
-  res.status(err.status || 500); // Définit le code d'état HTTP (404, 500, etc.).
-  res.render('error'); // Rend une page d'erreur via le moteur de vue.
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+  // Réponse avec un statut d'erreur et la page d'erreur correspondante
+  res.status(err.status || 500);
+  res.render('error');  // Affiche une page d'erreur (fichier `views/error.pug` si nécessaire)
 });
 
-module.exports = app; // Exporte l'application pour être utilisée ailleurs (comme dans `bin/www` pour démarrer le serveur).
+module.exports = app;
+

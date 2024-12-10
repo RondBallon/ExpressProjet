@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Modifier l'utilisateur
+  body
+    h1 Modifier l'utilisateur #{user.name}
+    form(action=`/users/${user.id}`, method="POST")
+      label(for="name") Nom
+      input(type="text" name="name" id="name" value="#{user.name}")
+      label(for="email") Email
+      input(type="email" name="email" id="email" value="#{user.email}")
+      label(for="password") Mot de passe
+      input(type="password" name="password" id="password" value="#{user.password}")
+      button(type="submit") Mettre à jour
