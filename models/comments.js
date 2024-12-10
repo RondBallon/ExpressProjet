@@ -1,8 +1,8 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+const {Model} = require('sequelize');
+const sequelize =require('../sequelize');
+const {DataTypes} = require('sequelize');
+//module.exports = (sequelize, DataTypes) => {
   class Comments extends Model {
     /**
      * Helper method for defining associations.
@@ -14,12 +14,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Comments.init({
-    user_id: DataTypes.BIGINT,
-    post_id: DataTypes.BIGINT,
-    content: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+  }, // Permet des valeurs nulles pour user_id
+    post_id:{ 
+      type:DataTypes.BIGINT,
+      allowNull: true, // Permet des valeurs nulles pour post_id
+  },  
+    content:{
+        type:DataTypes.STRING,
+        allowNull: false, // Le contenu est tjs requis
+  },  
   }, {
     sequelize,
     modelName: 'Comments',
   });
-  return Comments;
-};
+  //return Comments;
+//};
+module.exports = Comments;

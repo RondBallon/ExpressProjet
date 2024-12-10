@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h1 Liste des Commentaires
+  console.log(comments)
+  if comments.length > 0
+    ul
+      each comment in comments
+        li
+          p Contenu: #{comment.content}
+          p Créé le: #{comment.createdAt.toLocaleString()} 
+          p Mis à jour le: #{comment.updatedAt.toLocaleString()}
+  else
+    p Aucun commentaire trouvé.
