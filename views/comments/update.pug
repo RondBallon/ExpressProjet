@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+  h1 Ajouter un Commentaire
+
+  // Formulaire pour modifier un commentaire
+  form(action="`/comments/listComments/update" method="PUT")
+    // Champ pour le contenu du commentaire
+    div
+      label(for="content") Contenu du Commentaire:
+      textarea(name="content" id="id" rows="4" cols="50" required)
+    
+    //Champ pour l'ID de l'utilisateur (lié à user_id)
+    div
+      //label(for="user_id") ID de l'utilisateur:
+      input(hidden type="number" name="user_id" id="user_id" )
+    
+    // Champ pour l'ID du post (lié à post_id)
+    div
+      //label(for="post_id") ID du post:
+      input(hidden type="number" name="post_id" id="post_id")
+
+    // Bouton de soumission
+    div
+      button(type="submit") Modifier
