@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    H1 Nouveau post
+    body
+        form(action='/posts/add', method='POST', class='postForm')
+            div
+                label(for='title') Titre :
+                input(type='text', id=title, name='title', placeholder='Indiquez un titre..', required)
+                br
+            div 
+                label(for='content') Votre message :    
+                input(type='text', name='content', placeholder='Indiquez le corps du message..', required)
+                br
+            div
+                label(for='image') Votre image :
+                input(type='text', name='image', placeholder='Lien vers votre image..')
+                br
+            div
+                label(for='tags') Tags :
+                input(type='text', name='tags', placeholder="Choisissez les tags..")
+                br
+            div
+                button(type='submit') Envoyer
