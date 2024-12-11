@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Sert les fichiers st
 
 // Déclaration des routes
 app.use('/', indexRouter); // Utilise `indexRouter` pour la route racine `/`.
-app.use('/users', usersRouter); // Utilise `usersRouter` pour la route `/users`.
+app.use('/users', userRouter); // Utilise `usersRouter` pour la route `/users`.
 app.use('/posts', postsRouter);
 
 // Gestion des erreurs 404
