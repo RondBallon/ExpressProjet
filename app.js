@@ -8,7 +8,7 @@ var createError = require("http-errors");
 var app = express();
 // Importation des routes
 var indexRouter = require("./routes/index"); // Route pour la racine (`/`).
-var userRouter = require("./routes/users/users"); // Nous utilisons maintenant la route qui gère les utilisateurs
+var usersRouter = require("./routes/users/users"); // Nous utilisons maintenant la route qui gère les utilisateurs
 var postsRouter = require("./routes/posts"); // Route pour `/posts`.
 
 // Ajouter le middleware express.urlencoded et autres après la création de l'app
