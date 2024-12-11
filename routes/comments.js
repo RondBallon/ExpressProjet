@@ -4,15 +4,6 @@ const router = express.Router(); // Crée un routeur qui va nous permettre de d�
 
 const commentsController = require("../controllers/commentsController.js");
 
-/* const  { 
-  editCommentForm,
-  createComment,
-  getAllComments,
-  getComment,
-  updateComment,
-  deleteComment 
-} = require('../controllers/commentsController.js'); */
-
 /***********  CRUD **************/
 //route pour afficher le formulaire de création de commentaire
 router.get("/form", commentsController.editCommentForm);
@@ -29,7 +20,7 @@ router.get("/listComments", commentsController.getAllComments);
 router.get("/form/:id", commentsController.getComment);
 
 //route pour afficher le formulaire de modification d'un commentaire
-router.get("/form", commentsController.updateCommentForm);
+//router.get("/form", commentsController.updateCommentForm);
 
 // route pour modifier un commentaire
 //méthode HTTP : PUT
