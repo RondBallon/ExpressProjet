@@ -7,8 +7,12 @@ block content
     ul
       each comment in comments
         li
+          p id: #{comment.id}
           p Contenu: #{comment.content}
           p Créé le: #{comment.createdAt.toLocaleString()} 
           p Mis à jour le: #{comment.updatedAt.toLocaleString()}
+          button(class="update" type="submit" method="PUT" onclick=`location.href='/comments/listComments/update/${comment.id}'`) Modifier
+
+          button(class="delete" type="submit" ) Supprimer
   else
     p Aucun commentaire trouvé.

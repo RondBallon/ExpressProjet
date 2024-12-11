@@ -3,12 +3,12 @@ extends ../layout
 block content
   h1 Ajouter un Commentaire
 
-  // Formulaire pour ajouter un commentaire
-  form(action="/comments" method="POST")
+  // Formulaire pour modifier un commentaire
+  form(action="`/comments/listComments/update" method="PUT")
     // Champ pour le contenu du commentaire
     div
       label(for="content") Contenu du Commentaire:
-      textarea(name="content" id="content" rows="4" cols="50" required)
+      textarea(name="content" id="id" rows="4" cols="50" required)
     
     //Champ pour l'ID de l'utilisateur (lié à user_id)
     div
@@ -22,13 +22,4 @@ block content
 
     // Bouton de soumission
     div
-      button(type="submit") Publier
-      //button(class="delete" type="submit") Supprimer
-
-  h2 on affiche un commentaire
-      ul
-        li
-          p id: #{comment.id}
-          p Contenu: #{comment.content}
-          //p Créé le: #{comment.createdAt.toLocaleString()} 
-          //p Mis à jour le: #{comment.updatedAt.toLocaleString()}
+      button(type="submit") Modifier
