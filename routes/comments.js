@@ -11,6 +11,7 @@ const router = express.Router(); // Crée un routeur qui va nous permettre de d�
 const commentsController = require('../controllers/commentsController.js');
 >>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
 
+<<<<<<< HEAD
 /* const  { 
   editCommentForm,
   createComment,
@@ -21,6 +22,8 @@ const commentsController = require('../controllers/commentsController.js');
 } = require('../controllers/commentsController.js'); */
 
 <<<<<<< HEAD
+=======
+>>>>>>> 5fdb45e (fix des routes /form /form:id on peut afficher le formulaire d'ajout de commentaire, ajouter un comentaire, afficher tous les commentaires existants dans la bdd et afficher un commentaire en particulier via son id)
 /***********  CRUD **************/
 //route pour afficher le formulaire de création de commentaire
 router.get("/form", commentsController.editCommentForm);
@@ -37,7 +40,7 @@ router.get("/listComments", commentsController.getAllComments);
 router.get("/form/:id", commentsController.getComment);
 
 //route pour afficher le formulaire de modification d'un commentaire
-router.get("/form", commentsController.updateCommentForm);
+//router.get("/form", commentsController.updateCommentForm);
 
 // route pour modifier un commentaire
 //méthode HTTP : PUT
