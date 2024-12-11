@@ -117,11 +117,23 @@ const postForm = (req, res, next) => {
     if (!Comments) return res.status(404).send;
 };
 
+const displayAllPosts = async (req, res, next) => {
+    try {
+        const posts = await Post.findAll();
+        res.render('/homePage', { posts });
+    } catch (error) {
+        res.status(500).json({
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
     getPost,
     getPosts,
     createPost,
     deletePost,
     updatePost,
-    postForm
+    postForm,
+    displayAllPosts
 }

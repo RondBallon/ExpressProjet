@@ -1,3 +1,14 @@
 extends ../layout
 
-block content 
+block content
+if comments.length > 0
+    ul
+      each post in posts
+        li
+          p id: #{post.id}
+          p Titre: #{post.title}
+          p Contenu: #{post.content}
+          p Image: #{post.image}
+          p Créé le: #{comment.createdAt.toLocaleString()} 
+          p Mis à jour le: #{comment.updatedAt.toLocaleString()}  else
+    p Aucun commentaire trouvé.

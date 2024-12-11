@@ -2,7 +2,11 @@ var express = require('express');
 var router = express.Router();
 var controller = require('../controllers/postsController')
 
+// route formulaire ajout post
 router.get('/post_form', controller.postForm);
+
+// route "homepage"
+router.get('/homePage', controller.displayAllPosts)
 
 // route GET pour affichage de tous les posts dans browser
 router.get('/', controller.getPosts);
