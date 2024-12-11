@@ -8,8 +8,8 @@ var createError = require('http-errors');
 var app = express();
 // Importation des routes
 var indexRouter = require('./routes/index'); // Route pour la racine (`/`).
-var usersRouter = require('./routes/users'); // Route pour `/users`.
-var postsRouter = require('./routes/posts');
+var userRouter = require('./routes/users/users');  // Nous utilisons maintenant la route qui gère les utilisateurs
+var postsRouter = require('./routes/posts'); // Route pour `/posts`.
 
 // Ajouter le middleware express.urlencoded et autres après la création de l'app
 app.use(express.urlencoded({ extended: true })); // Si tu veux aussi traiter les formulaires avec des méthodes PUT et DELETE
@@ -18,21 +18,14 @@ app.use(cookieParser());  // Analyser les cookies dans les requêtes
 app.use(express.static(path.join(__dirname, 'public')));  // Servir les fichiers statiques (si nécessaires)
 app.use(logger('dev'));  // Journaliser les requêtes HTTP
 
-// Importer les routes
-var userRouter = require('./routes/users/users');  // Nous utilisons maintenant la route qui gère les utilisateurs
-var indexRouter = require('./routes/index');  // La route pour la page d'accueil (index)
 // Configuration de Sequelize pour gérer la base de données
 const sequelize = require('./sequelize'); // Instance Sequelize configurée pour la base de données.
 const User = require('./models/User'); // Exemple d'importation d'un modèle Sequelize représentant une table.
-const posts = require('./models/post');
+const Post = require('./models/post');
 
 // Configuration de l'application
 app.set('views', path.join(__dirname, 'views'));  // Définit le répertoire pour les vues (templates)
 app.set('view engine', 'pug');  // Définit le moteur de vues (Pug ici)
-
-// Routes
-app.use('/', indexRouter);  // La route pour la page d'accueil
-app.use('/users', userRouter);  // Gérer les utilisateurs avec le fichier `users.js` (ta route des utilisateurs)
 
 // Configuration des middlewares
 app.use(logger('dev')); // Ajoute un journal des requêtes HTTP en mode développement.

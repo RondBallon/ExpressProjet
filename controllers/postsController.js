@@ -1,9 +1,9 @@
-const post = require ('../models/post')
-
+const Post = require('../models/post');
 
 //get all posts
-exports.getPosts = (req, res, next) => {
-    posts.findAll()
+const getPosts = (req, res, next) => {
+    console.log("Test")
+    Post.findAll()
         .then(posts => {
             res.status(200).json({ posts: posts });
         })
@@ -11,9 +11,9 @@ exports.getPosts = (req, res, next) => {
 }
 
 //get post by id
-exports.getPost = (req, res, next) => {
-    const postId = req.params.postId;
-    post.findByPk(postId)
+const getPost = (req, res, next) => {
+    const postId = req.params.id;
+    Post.findByPk(postId)
         .then(post => {
             if (!post) {
                 return res.status(404).json({ message: 'Post not found!' });
@@ -24,70 +24,104 @@ exports.getPost = (req, res, next) => {
 }
 
 //create post
-exports.createPost = (req, res, next) => {
-  const title = req.body.title;
-  const content = req.body.content;
-  const image = req.body.image
-  const tag_id = req.body.tag_id
-  post.create({
-    title: title,
-    content: content,
-    image: image,
-    tag_id: tag_id
+const createPost = async (req, res, next) => {
+    try {
+        const title = req.body.title;
+        const content = req.body.content;
+        const image = req.body.image
+        const tag_id = req.body.tag_id
 
-  })
-    .then(result => {
-      console.log('Created post');
-      res.status(201).json({
-        message: 'Post created successfully!',
-        post: result
-      });
-    })
-    .catch(err => {
-      console.log(err);
-    }); 
-}
+        await Post.create({
+            title: title,
+            content: content,
+            image: image,
+            tag_id: tag_id || null
+
+        })
+
+
+        console.log('Nouveau post');
+        res.status(201).json({
+            message: 'Post créé avec succès !',
+            post: title
+        });
+    } catch (error) {
+        console.error('Erreur lors de la création du post :', error);
+        res.status(500).json({
+            message: 'Erreur lors de la création du post.',
+            error: error.message,
+        });
+    };
+};
 
 //update post
-exports.updatePost = (req, res, next) => {
-  const postId = req.params.postId;
-  const updateTitle = req.body.title;
-  const updateContent = req.body.content;
-  const updateImage = req.body.image
-  const updateTag_id = req.body.tag_id
-  Post.findByPk(postId)
-    .then(post => {
-      if (!post) {
-        return res.status(404).json({ message: 'Post not found!' });
-      }
-      post.title = updateTitle;
-      post.content = updateContent;
-      post.image = updateImage
-      post.tag_id = updateTag_id
-      return post.save();
-    })
-    .then(result => {
-      res.status(200).json({message: 'Post updated!', post: result});
-    })
-    .catch(err => console.log(err));
+const updatePost = async (req, res, next) => {
+    try {
+        const postId = req.params.id;
+        const updateTitle = req.body.title;
+        const updateContent = req.body.content;
+        const updateImage = req.body.image
+        const updateTag_id = req.body.tag_id
+
+        const postToModify = await Post.findByPk(postId)
+        if (!postToModify) {
+            return res.status(404).json({ message: 'Post not found!' });
+        } else {
+            postToModify.title = updateTitle;
+            postToModify.content = updateContent;
+            postToModify.image = updateImage
+            postToModify.tag_id = updateTag_id
+            await postToModify.save();
+        }
+        res.status(200).json({ message: 'Post updated!'});
+
+    } catch (error) {
+        console.error('Erreur lors de la modification du post :', error);
+        res.status(500).json({
+            message: 'Erreur lors de la modification du post.',
+            error: error.message,
+        });
+    };
 }
 
 //delete post
-exports.deletePost = (req, res, next) => {
-  const postId = req.params.postId;
-  post.findByPk(postId)
-    .then(post => {
-      if (!post) {
-        return res.status(404).json({ message: 'Post not found!' });
-      }
-      return post.destroy({
-        where: {
-          id: postId
+const deletePost = async (req, res, next) => {
+    try {
+        const postId = req.params.id;
+        console.log(postId)
+        const postToDelete = await Post.findByPk(postId)
+        console.log(postToDelete)
+        if (!postToDelete) {
+            res.status(400).json({ message: 'Post not found' })
+        } else {
+            await postToDelete.destroy({
+                where: {
+                    id: postId,
+                },
+            });
+            res.status(200).json({ message: 'Post deleted' })
         }
-      });
-    })
-    .then(result => {
-      res.status(200).json({ message: 'Post deleted!' });
-    })
-    .catch(err => console.log(err));
+
+    } catch (error) {
+        console.error('Erreur lors de la destruction du post :', error);
+        res.status(500).json({
+            message: 'Erreur lors de la destruction du post.',
+            error: error.message,
+        });
+    };
+}
+
+//formulaire de création de post
+const postForm = (req, res, next) => {
+    res.render('posts/post_form');
+    if (!Comments) return res.status(404).send;
+};
+
+module.exports = {
+    getPost,
+    getPosts,
+    createPost,
+    deletePost,
+    updatePost,
+    postForm
 }

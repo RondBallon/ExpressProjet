@@ -1,10 +1,8 @@
-'use strict'; 
-// Mode strict activé, ce qui rend le JavaScript plus rigoureux et empêche certains comportements indésirables, comme l'utilisation de variables non définies.
-
-const { Model } = require('sequelize'); 
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../sequelize'); 
 // On importe la classe `Model` de Sequelize. Cette classe est la base pour tous les modèles dans Sequelize. Chaque modèle, comme ici le modèle `Post`, héritera de cette classe pour interagir avec la base de données.
 
-module.exports = (sequelize, DataTypes) => { 
+//module.exports = (sequelize, DataTypes) => { 
   // On exporte une fonction anonyme qui prend deux paramètres : `sequelize` et `DataTypes`.
   // `sequelize` est l'instance de la connexion à la base de données et `DataTypes` est un objet contenant les types de données disponibles qu'on peut utiliser pour définir nos attributs de modèle.
 
@@ -43,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Post',  // Le nom du modèle. Ici, il s'appelle `Post`.
   });
 
-  return Post; 
+  //return Post; 
   // Enfin, on retourne le modèle `Post` créé, de sorte qu'il soit accessible ailleurs dans l'application.
-};
+//};
+module.exports= Post
