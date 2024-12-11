@@ -2,8 +2,8 @@ const Comments = require("../models/comments"); //Importe le modèle Sequelize p
 
 //Pour afficher le formulaire de création de commentaires
 const editCommentForm = (req, res) => {
+  //const comment = Comments.findByPk(req.params.id);
   res.render("comments/create");
-  const comment = Comment.findByPk(req.params.id);
   if (!Comments) return res.status(404).send;
 };
 
@@ -68,11 +68,11 @@ const getComment = async (req, res) => {
   const comment = await Comments.findByPk(id);
   //console.log(comment);
   if (!comment) {
-    //return res.status(404).send('Commentaire introuvable')
+    return res.status(404).send("Commentaire introuvable");
     //return console.log(Comments);
   }
   //res.json(comment);
-  res.render("comments/create", { comment });
+  res.render("comments/oneCommentById", { comment });
 };
 
 //Pour MODIFIER un commentaire
@@ -92,8 +92,8 @@ const getComment = async (req, res) => {
 
 //Pour afficher le formulaire de modification d'un commentaire
 const updateCommentForm = async (req, res) => {
+  const CommentToUpdate = await Comments.findByPk(req.params.id);
   res.render("comments/update");
-  const CommentToUpdate = await Comment.findByPk(req.params.id);
   if (!Comments) return res.status(404).send;
 };
 
@@ -104,7 +104,7 @@ const updateComment = async (req, res) => {
     const { content, user_id, post_id } = req.body;
 
     // Trouver le commentaire par ID
-    const comment = await Comments.findByPk(id);
+    const comment = await Comment.findByPk(id);
 
     if (!comment) {
       return res.status(404).json({ message: "Commentaire introuvable" });

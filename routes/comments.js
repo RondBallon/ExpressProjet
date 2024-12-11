@@ -20,7 +20,7 @@ router.get("/listComments", commentsController.getAllComments);
 router.get("/form/:id", commentsController.getComment);
 
 //route pour afficher le formulaire de modification d'un commentaire
-router.get("/form", commentsController.updateCommentForm);
+//router.get("/form", commentsController.updateCommentForm);
 
 // route pour modifier un commentaire
 //méthode HTTP : PUT
