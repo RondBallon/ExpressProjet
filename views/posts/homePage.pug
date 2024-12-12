@@ -1,0 +1,17 @@
+extends ../layout
+block content
+  include ../posts/post_form.pug
+  p Liste des posts
+    if posts.length > 0
+      ul
+        each post in posts
+          li
+            p id: #{post.id}
+            p Titre: #{post.title}
+            p Contenu: #{post.content}
+            p Image: 
+              img(src=post.image)
+            p Créé le: #{post.createdAt.toLocaleString()} 
+            p Mis à jour le: #{post.updatedAt.toLocaleString()}  
+    else
+      p Aucun commentaire trouvé.
