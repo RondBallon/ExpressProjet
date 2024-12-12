@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-if comments.length > 0
+if posts.length > 0
     ul
       each post in posts
         li
@@ -9,6 +9,6 @@ if comments.length > 0
           p Titre: #{post.title}
           p Contenu: #{post.content}
           p Image: #{post.image}
-          p Créé le: #{comment.createdAt.toLocaleString()} 
-          p Mis à jour le: #{comment.updatedAt.toLocaleString()}  else
+          p Créé le: #{post.createdAt.toLocaleString()} 
+          p Mis à jour le: #{post.updatedAt.toLocaleString()}  else
     p Aucun commentaire trouvé.
