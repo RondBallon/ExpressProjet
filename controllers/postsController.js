@@ -120,7 +120,7 @@ const postForm = (req, res, next) => {
 const displayAllPosts = async (req, res, next) => {
     try {
         const posts = await Post.findAll();
-        res.render('/homePage', { posts });
+        res.render('posts/homePage', { posts });
     } catch (error) {
         res.status(500).json({
             error: error.message,

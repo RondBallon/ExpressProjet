@@ -26,7 +26,9 @@ const Post = require('./models/post');
 
 // Configuration de l'application
 app.set('views', path.join(__dirname, 'views'));  // Définit le répertoire pour les vues (templates)
+app.set('views', './public/images')
 app.set('view engine', 'pug');  // Définit le moteur de vues (Pug ici)
+
 
 // Configuration des middlewares
 app.use(logger('dev')); // Ajoute un journal des requêtes HTTP en mode développement.
