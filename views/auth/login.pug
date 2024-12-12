@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  .login-container
+    h2 Login
+    form(action="/auth/login" method="POST")
+      .form-group
+        label(for="username") Username
+        input(
+          type="text" 
+          id="username" 
+          name="username" 
+          placeholder="Enter your username" 
+          required
+        )
+      
+      .form-group
+        label(for="password") Password
+        input(
+          type="password" 
+          id="password" 
+          name="password" 
+          placeholder="Enter your password" 
+          required
+        )
+      
+      button(type="submit") Login
+
+    p.signup-link 
+      | Pas encore de compte ?
+      a(href="/users/create") Sign Up

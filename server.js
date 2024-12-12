@@ -3,9 +3,9 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hello from Node.js server');
+  res.send('BONJOUR NODE FAIS TON TAFF');
 });
 
 const server = app.listen(process.env.PORT || 3000, () => {
-  console.log(`Hacker news server started on port: ${server.address().port}`);
+  console.log(`serveur bananes en route sur le port: ${server.address().port}`);
 });

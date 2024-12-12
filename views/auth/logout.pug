@@ -1,0 +1,9 @@
+  
+extends ../layout
+
+block content
+  .logout-container
+    h2 Logout
+    p Are you sure you want to log out?
+    form(action="/auth/logout" method="POST")
+      button(type="submit") Confirm Logout
