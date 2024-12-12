@@ -65,6 +65,54 @@ const getComment = async (req, res) => {
 };
 
 // Affiche le formulaire pour modifier un commentaire
+//Pour MODIFIER un commentaire
+/* const updateComment = async (req, res) => {
+  const id = req.params.id;
+  const index = await Comments.findIndex((comment) => id === id);
+//pour afficher TOUS les commentaires 
+const getAllComments = async(req, res) => {
+   
+  try{
+    //on récupère tous les commentaires depuis la base de données
+    const comments =await Comments.findAll();
+    //console.log(comments);
+    //Envoyer les articles au template `comments/index` pour qu'ils soient affichés 
+    //res.json(comments)
+    res.render('comments/listComments', {comments});
+
+  }catch (err){
+    console.error(err);
+    res.status(500).send('Erreur lors de la récupération des articles.');
+  }
+}
+
+// Pour afficher un commentaire en particulier via son ID
+
+const getComment = ((req, res) => {
+  const id = Number(req.params.comment_id)
+  const comment = Comments.find(comment => comment_id === id)
+    if(!comment){
+      return res.status(404).send('Commentaire introuvable')
+    }
+    res.json(comment)
+})
+
+//Pour MODIFIER un commentaire
+const updateComment = ((req, res) =>{
+  const id = Number(req.params.comment_id)
+  const index = Comments.findIndex(comment => comment_id === id)
+  const updatedComment = {
+    id: Comments[index].id,
+    content: req.body.content,
+    user_id: req.body.user,
+    post_id: req.body.post,
+  };
+  Comments[index] = updatedComment;
+  res.render("comment/listComments");
+  res.status(200).json("Commentaire mis à jour");
+}; */
+
+//Pour afficher le formulaire de modification d'un commentaire
 const updateCommentForm = async (req, res) => {
   const CommentToUpdate = await Comments.findByPk(req.params.id); // Trouve le commentaire par ID
   res.render("comments/update"); // Rend la vue `update` pour modification
