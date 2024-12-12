@@ -79,10 +79,55 @@ const getComment = async (req, res) => {
 /* const updateComment = async (req, res) => {
   const id = req.params.id;
   const index = await Comments.findIndex((comment) => id === id);
+<<<<<<< HEAD
+=======
+=======
+//pour afficher TOUS les commentaires 
+const getAllComments = async(req, res) => {
+   
+  try{
+    //on récupère tous les commentaires depuis la base de données
+    const comments =await Comments.findAll();
+    //console.log(comments);
+    //Envoyer les articles au template `comments/index` pour qu'ils soient affichés 
+    //res.json(comments)
+    res.render('comments/listComments', {comments});
+
+  }catch (err){
+    console.error(err);
+    res.status(500).send('Erreur lors de la récupération des articles.');
+  }
+}
+
+// Pour afficher un commentaire en particulier via son ID
+
+const getComment = ((req, res) => {
+  const id = Number(req.params.comment_id)
+  const comment = Comments.find(comment => comment_id === id)
+    if(!comment){
+      return res.status(404).send('Commentaire introuvable')
+    }
+    res.json(comment)
+})
+
+//Pour MODIFIER un commentaire
+const updateComment = ((req, res) =>{
+  const id = Number(req.params.comment_id)
+  const index = Comments.findIndex(comment => comment_id === id)
+<<<<<<< HEAD
+>>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
+=======
+>>>>>>> 3378dac (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
+>>>>>>> 685c5bc (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
+>>>>>>> GitIsABitch
   const updatedComment = {
     id: Comments[index].id,
     content: req.body.content,
     user_id: req.body.user,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> GitIsABitch
     post_id: req.body.post,
   };
   Comments[index] = updatedComment;
@@ -143,3 +188,4 @@ module.exports = {
   updateComment,
   deleteComment,
 };
+
