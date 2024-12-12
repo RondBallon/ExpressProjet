@@ -81,7 +81,6 @@ const getComment = async (req, res) => {
 /* const updateComment = async (req, res) => {
   const id = req.params.id;
   const index = await Comments.findIndex((comment) => id === id);
-=======
 //pour afficher TOUS les commentaires 
 const getAllComments = async(req, res) => {
    
@@ -114,16 +113,10 @@ const getComment = ((req, res) => {
 const updateComment = ((req, res) =>{
   const id = Number(req.params.comment_id)
   const index = Comments.findIndex(comment => comment_id === id)
-<<<<<<< HEAD
->>>>>>> 2dbc3e6 (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
-=======
->>>>>>> 3378dac (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
->>>>>>> 685c5bc (formulaire pour créer en commentaire ok + afficher tous les commentaires sur une vue manque la possibilité de modifier et supprimer un commentaire)
   const updatedComment = {
     id: Comments[index].id,
     content: req.body.content,
     user_id: req.body.user,
-<<<<<<< HEAD
     post_id: req.body.post,
   };
   Comments[index] = updatedComment;
